@@ -1,2 +1,1 @@
-"# TO-komiwojazer" 
-zmiana
+# TO-komiwojazer
