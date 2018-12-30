@@ -7,7 +7,6 @@ import utils.TSPFileParser;
 import java.util.*;
 
 public class GreedyCycle {
-    public static Map<Point, Double> distanceLengths = new HashMap<>();
     public static List<Point> loadedPoints;
     public static List<Point> arrangedPoints = new LinkedList<>();
 
@@ -16,6 +15,7 @@ public class GreedyCycle {
     }
 
     public static Point nextPoint(Point startingPoint) {
+        Map<Point, Double> distanceLengths = new HashMap<>();
         for (Point point:loadedPoints) {
             distanceLengths.put(point, EuclideanDist.calc(startingPoint, point));
         }
