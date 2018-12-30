@@ -28,19 +28,20 @@ public class GreedyCycle {
         return min.getKey();
     }
 
-    public static List<Point> arrangePoints(Point startingPoint) {
+    public static List<Point> arrangePoints(int startingPoint) {
         loadPoints();
 
-        arrangedPoints.add(startingPoint);
+        arrangedPoints.add(loadedPoints.get(startingPoint));
 //        loadedPoints.remove(startingPoint);
-        loadedPoints.remove(arrangedPoints.indexOf(startingPoint) + 1);
+        loadedPoints.remove(loadedPoints.get(startingPoint));
+
+
 
         for (int i = 0; i < 99; i++) {
             Point tempPoint = nextPoint(arrangedPoints.get(arrangedPoints.size()-1));
             System.out.println(tempPoint.x + " " + tempPoint.y);
             arrangedPoints.add(tempPoint);
-//            loadedPoints.remove(tempPoint);
-            loadedPoints.remove(arrangedPoints.indexOf(tempPoint) + 1);
+            loadedPoints.remove(tempPoint);
 
         }
         return arrangedPoints;
