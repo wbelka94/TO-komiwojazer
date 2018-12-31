@@ -2,22 +2,27 @@ package algorithms;
 
 import models.Point;
 import utils.EuclideanDist;
-import utils.TSPFileParser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class GreedyCycle {
-    public static List<Point> loadedPoints;
-    public static List<Point> arrangedPoints = new LinkedList<>();
+public class GreedyCycle extends Algorithm {
+    private Point actualPoint;
+    private Point startPoint;
 
-    public static void loadPoints() {
-        loadedPoints = TSPFileParser.readData("data/kroA100.tsp");
+    public GreedyCycle(List<Point> points) {
+        super(points);
+        actualPoint = points.get(0);
+        startPoint = points.get(0);
     }
 
-    public static Point nextPoint(Point startingPoint) {
+    private Point nextPoint() {
         Map<Point, Double> distanceLengths = new HashMap<>();
-        for (Point point:loadedPoints) {
-            distanceLengths.put(point, EuclideanDist.calc(startingPoint, point));
+        for (Point point:this.points) {
+            double summaryDistance = EuclideanDist.calc(actualPoint, point) + EuclideanDist.calc(startPoint, point);
+            distanceLengths.put(point, summaryDistance);
         }
         Map.Entry<Point, Double> min = null;
         for (Map.Entry<Point, Double> entry : distanceLengths.entrySet()) {
@@ -28,21 +33,17 @@ public class GreedyCycle {
         return min.getKey();
     }
 
-    public static List<Point> arrangePoints(int startingPoint) {
-        loadPoints();
-
-        arrangedPoints.add(loadedPoints.get(startingPoint));
-//        loadedPoints.remove(startingPoint);
-        loadedPoints.remove(loadedPoints.get(startingPoint));
-
-
+    @Override
+    public List<Point> arrangePoints() {
+        List<Point> arrangedPoints = new ArrayList<>();
+        arrangedPoints.add(startPoint);
+        points.remove(startPoint);
 
         for (int i = 0; i < 99; i++) {
-            Point tempPoint = nextPoint(arrangedPoints.get(arrangedPoints.size()-1));
-            System.out.println(tempPoint.x + " " + tempPoint.y);
-            arrangedPoints.add(tempPoint);
-            loadedPoints.remove(tempPoint);
-
+            actualPoint = nextPoint();
+            System.out.println(actualPoint.x + " " + actualPoint.y);
+            arrangedPoints.add(actualPoint);
+            points.remove(actualPoint);
         }
         return arrangedPoints;
     }
