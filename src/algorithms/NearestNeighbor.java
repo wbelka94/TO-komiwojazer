@@ -1,0 +1,49 @@
+package algorithms;
+
+import models.Point;
+import utils.EuclideanDist;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class NearestNeighbor extends Algorithm {
+    private Point actualPoint;
+    private Point startPoint;
+
+    public NearestNeighbor(List<Point> points) {
+        super(points);
+        actualPoint = points.get(0);
+        startPoint = points.get(0);
+    }
+
+    private Point nextPoint() {
+        Map<Point, Double> distanceLengths = new HashMap<>();
+        for (Point point:this.points) {
+            distanceLengths.put(point, EuclideanDist.calc(actualPoint, point));
+        }
+        Map.Entry<Point, Double> min = null;
+        for (Map.Entry<Point, Double> entry : distanceLengths.entrySet()) {
+            if (min == null || min.getValue() > entry.getValue()) {
+                min = entry;
+            }
+        }
+        return min.getKey();
+    }
+
+    @Override
+    public List<Point> arrangePoints() {
+        List<Point> arrangedPoints = new ArrayList<>();
+        arrangedPoints.add(startPoint);
+        points.remove(startPoint);
+
+        for (int i = 0; i < 99; i++) {
+            actualPoint = nextPoint();
+            System.out.println(actualPoint.x + " " + actualPoint.y);
+            arrangedPoints.add(actualPoint);
+            points.remove(actualPoint);
+        }
+        return arrangedPoints;
+    }
+}
