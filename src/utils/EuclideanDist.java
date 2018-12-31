@@ -4,6 +4,6 @@ import models.Point;
 
 public class EuclideanDist {
     public static double calc(Point a, Point b) {
-        return Math.sqrt(Math.pow((a.x - b.x), 2));
+        return Math.sqrt(Math.pow((a.x - b.x), 2) + Math.pow((a.y - b.y), 2));
     }
 }
