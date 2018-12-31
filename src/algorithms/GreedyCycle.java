@@ -21,7 +21,7 @@ public class GreedyCycle extends Algorithm {
     private Point nextPoint() {
         Map<Point, Double> distanceLengths = new HashMap<>();
         for (Point point:this.points) {
-            double summaryDistance = EuclideanDist.calc(actualPoint, point) + EuclideanDist.calc(startPoint, point);
+            double summaryDistance = EuclideanDist.calc(actualPoint, point) + EuclideanDist.calc(startPoint, actualPoint);
             distanceLengths.put(point, summaryDistance);
         }
         Map.Entry<Point, Double> min = null;
@@ -39,7 +39,8 @@ public class GreedyCycle extends Algorithm {
         arrangedPoints.add(startPoint);
         points.remove(startPoint);
 
-        for (int i = 0; i < 99; i++) {
+        int size = points.size();
+        for (int i = 0; i < size; i++) {
             actualPoint = nextPoint();
             System.out.println(actualPoint.x + " " + actualPoint.y);
             arrangedPoints.add(actualPoint);
