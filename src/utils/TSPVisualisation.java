@@ -72,6 +72,8 @@ public class TSPVisualisation {
 
     public static void show(List<Point> points, List<Point> path) throws Exception{
         Stage primaryStage = new Stage();
+        primaryStage.setWidth(1400);
+        primaryStage.setHeight(800);
         BorderPane mainRoot = new BorderPane();
         mainRoot.setPadding(new Insets(14));
         Pane root = new Pane();
