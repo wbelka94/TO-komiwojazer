@@ -4,7 +4,6 @@ import models.Point;
 import utils.EuclideanDist;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +32,7 @@ public class ILP extends LP {
                 System.out.println(newPath);
                 this.currentPath = new ArrayList<>(newPath);
                 next = true;
+                i = 0;
             }
             i++;
             if(i < 10){
@@ -51,10 +51,11 @@ public class ILP extends LP {
             path = new ArrayList<>(newPath);
             newPath = new ArrayList<>();
             int r1 = r.nextInt(pathLength);
-            int r2 = r.nextInt(pathLength - r1) + r1;
+            int r2 = r.nextInt(pathLength - r1 - 1) + r1 + 1;
             List<Point> l1 = new ArrayList<>(path.subList(0, r1));
             List<Point> l2 = new ArrayList<>(path.subList(r1, r2));
-            Collections.reverse(l2);
+            Algorithm alg = new GreedyCycle(l2);
+            l2 = alg.arrangePoints();
             List<Point> l3 = new ArrayList<>(path.subList(r2, pathLength));
             newPath.addAll(l1);
             newPath.addAll(l2);

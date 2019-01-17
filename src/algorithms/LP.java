@@ -15,7 +15,6 @@ public class LP extends Algorithm {
         super(path);
         this.currentPath = path;
         this.currentTotalDistance = EuclideanDist.calcForPath(currentPath);
-        System.out.println(this.currentTotalDistance);
     }
 
     @Override
@@ -28,13 +27,11 @@ public class LP extends Algorithm {
                 double newDistance = EuclideanDist.calcForPath(path);
                 if (newDistance < this.currentTotalDistance) {
                     this.currentTotalDistance = newDistance;
-                    System.out.println(this.currentTotalDistance);
                     this.currentPath = path;
                     next = true;
                 }
             }
         } while (next);
-
         return this.currentPath;
     }
 

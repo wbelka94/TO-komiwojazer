@@ -5,6 +5,7 @@ import algorithms.LP;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import models.Point;
+import utils.EuclideanDist;
 import utils.TSPFileParser;
 import utils.TSPVisualisation;
 
@@ -32,6 +33,9 @@ public class MainFX extends Application {
         TSPVisualisation.show(points2, arrangedPoints, "GreedyCycle");
         TSPVisualisation.show(points2, orderedCities2, "LP");
         TSPVisualisation.show(points2, orderedCities3, "ILP");
+        System.out.println(EuclideanDist.calcForPath(arrangedPoints));
+        System.out.println(EuclideanDist.calcForPath(orderedCities2));
+        System.out.println(EuclideanDist.calcForPath(orderedCities3));
     }
 
 
