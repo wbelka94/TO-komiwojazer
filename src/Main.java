@@ -11,12 +11,14 @@ public class Main {
         List<Point> points = TSPFileParser.readData("data/kroA100.tsp");
 
         Algorithm algoritm = new GreedyCycle(points);
-        algoritm.arrangePoints();
+        List<Point> firstPath = algoritm.arrangePoints();
 
         points = TSPFileParser.readData("data/kroA100.tsp");
 
         algoritm = new NearestNeighbor(points);
-        algoritm.arrangePoints();
+        List<Point> secondPath =algoritm.arrangePoints();
+
+        //MainFX.main(TSPFileParser.readData("data/kroA100.tsp"), firstPath,null);
 
     }
 }
