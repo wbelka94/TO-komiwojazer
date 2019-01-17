@@ -1,5 +1,6 @@
 import algorithms.Algorithm;
 import algorithms.GreedyCycle;
+import algorithms.ILP;
 import algorithms.LP;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -7,6 +8,7 @@ import models.Point;
 import utils.TSPFileParser;
 import utils.TSPVisualisation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainFX extends Application {
@@ -24,10 +26,12 @@ public class MainFX extends Application {
 
         Algorithm algoritm2 = new GreedyCycle(points2);
         List<Point> arrangedPoints = algoritm2.arrangePoints();
-        List<Point> orderedCities2 = (new LP(arrangedPoints).arrangePoints());
+        List<Point> orderedCities2 = (new LP(new ArrayList<>(arrangedPoints)).arrangePoints());
+        List<Point> orderedCities3 = (new ILP(new ArrayList<>(arrangedPoints)).arrangePoints());
         points2 = TSPFileParser.readData("data/kroA100.tsp");
-        TSPVisualisation.show(points2, arrangedPoints);
-        TSPVisualisation.show(points2, orderedCities2);
+        TSPVisualisation.show(points2, arrangedPoints, "GreedyCycle");
+        TSPVisualisation.show(points2, orderedCities2, "LP");
+        TSPVisualisation.show(points2, orderedCities3, "ILP");
     }
 
 

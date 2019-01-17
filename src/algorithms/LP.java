@@ -38,7 +38,7 @@ public class LP extends Algorithm {
         return this.currentPath;
     }
 
-    private List<List<Point>> twoOpt() {
+    protected List<List<Point>> twoOpt() {
         List<List<Point>> N = new ArrayList<>();
         int pathLength = currentPath.size();
         for (int i = 0; i < pathLength - 1; i++) {

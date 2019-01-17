@@ -70,10 +70,11 @@ public class TSPVisualisation {
         return lines;
     }
 
-    public static void show(List<Point> points, List<Point> path) throws Exception{
+    public static void show(List<Point> points, List<Point> path, String title) throws Exception{
         Stage primaryStage = new Stage();
         primaryStage.setWidth(1400);
         primaryStage.setHeight(800);
+        primaryStage.setTitle(title);
         BorderPane mainRoot = new BorderPane();
         mainRoot.setPadding(new Insets(14));
         Pane root = new Pane();
@@ -105,7 +106,6 @@ public class TSPVisualisation {
         mainRoot.setCenter(root);
         mainRoot.setBottom(label);
         Scene scene = new Scene(mainRoot, 3700, 3700);
-        primaryStage.setTitle("TSP Genetic");
         primaryStage.setScene(scene);
 
         primaryStage.show();
