@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GreedyCycle extends Algorithm {
+public class GreedyCycle extends DivisionAlgorithm {
     private Point actualPoint;
     private Point startPoint;
 
@@ -18,7 +18,7 @@ public class GreedyCycle extends Algorithm {
         startPoint = points.get(0);
     }
 
-    private Point nextPoint() {
+    public Point nextPoint(Point actualPoint, Point startPoint) {
         Map<Point, Double> distanceLengths = new HashMap<>();
         for (Point point:this.points) {
             double summaryDistance = EuclideanDist.calc(actualPoint, point) + EuclideanDist.calc(startPoint, point);
@@ -40,7 +40,7 @@ public class GreedyCycle extends Algorithm {
         points.remove(startPoint);
         int size = points.size();
         for (int i = 0; i < size; i++) {
-            actualPoint = nextPoint();
+            actualPoint = nextPoint(actualPoint, startPoint);
             System.out.println(actualPoint.x + " " + actualPoint.y);
             arrangedPoints.add(actualPoint);
             points.remove(actualPoint);

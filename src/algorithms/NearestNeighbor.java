@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NearestNeighbor extends Algorithm {
+public class NearestNeighbor extends DivisionAlgorithm {
     private Point actualPoint;
     private Point startPoint;
 
@@ -18,7 +18,7 @@ public class NearestNeighbor extends Algorithm {
         startPoint = points.get(0);
     }
 
-    private Point nextPoint() {
+    public Point nextPoint(Point actualPoint, Point startPoint) {
         Map<Point, Double> distanceLengths = new HashMap<>();
         for (Point point:this.points) {
             distanceLengths.put(point, EuclideanDist.calc(actualPoint, point));
@@ -39,7 +39,7 @@ public class NearestNeighbor extends Algorithm {
         points.remove(startPoint);
 
         for (int i = 0; i < 99; i++) {
-            actualPoint = nextPoint();
+            actualPoint = nextPoint(actualPoint, startPoint);
             System.out.println(actualPoint.x + " " + actualPoint.y);
             arrangedPoints.add(actualPoint);
             points.remove(actualPoint);

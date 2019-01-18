@@ -1,4 +1,3 @@
-import algorithms.Algorithm;
 import algorithms.GreedyCycle;
 import algorithms.ILP;
 import algorithms.LP;
@@ -25,17 +24,22 @@ public class MainFX extends Application {
 
         List<Point> points2 = TSPFileParser.readData("data/kroA100.tsp");
 
-        Algorithm algoritm2 = new GreedyCycle(points2);
-        List<Point> arrangedPoints = algoritm2.arrangePoints();
-        List<Point> orderedCities2 = (new LP(new ArrayList<>(arrangedPoints)).arrangePoints());
-        List<Point> orderedCities3 = (new ILP(new ArrayList<>(arrangedPoints)).arrangePoints());
+        List<List<Point>> twoPath = (new GreedyCycle(points2)).arangeTwoPath();
+
+        List<Point> orderedCitiesLP1 = (new LP(new ArrayList<>(twoPath.get(0))).arrangePoints());
+        List<Point> orderedCitiesLP2 = (new LP(new ArrayList<>(twoPath.get(1))).arrangePoints());
+        List<Point> orderedCitiesILP1 = (new ILP(new ArrayList<>(twoPath.get(0))).arrangePoints());
+        List<Point> orderedCitiesILP2 = (new ILP(new ArrayList<>(twoPath.get(1))).arrangePoints());
+
         points2 = TSPFileParser.readData("data/kroA100.tsp");
-        TSPVisualisation.show(points2, arrangedPoints, "GreedyCycle");
-        TSPVisualisation.show(points2, orderedCities2, "LP");
-        TSPVisualisation.show(points2, orderedCities3, "ILP");
-        System.out.println(EuclideanDist.calcForPath(arrangedPoints));
-        System.out.println(EuclideanDist.calcForPath(orderedCities2));
-        System.out.println(EuclideanDist.calcForPath(orderedCities3));
+        TSPVisualisation.show(points2, orderedCitiesLP1, "LP_1");
+        TSPVisualisation.show(points2, orderedCitiesLP2, "LP_2");
+        TSPVisualisation.show(points2, orderedCitiesILP1, "ILP_1");
+        TSPVisualisation.show(points2, orderedCitiesILP2, "ILP_2");
+        System.out.println(EuclideanDist.calcForPath(orderedCitiesLP1));
+        System.out.println(EuclideanDist.calcForPath(orderedCitiesLP2));
+        System.out.println(EuclideanDist.calcForPath(orderedCitiesILP1));
+        System.out.println(EuclideanDist.calcForPath(orderedCitiesILP2));
     }
 
 
