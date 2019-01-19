@@ -29,7 +29,6 @@ public class ILP extends LP {
             double newDistance = EuclideanDist.calcForPath(newPath);
             if (newDistance < this.currentTotalDistance) {
                 this.currentTotalDistance = newDistance;
-                System.out.println(newPath);
                 this.currentPath = new ArrayList<>(newPath);
                 next = true;
                 i = 0;

@@ -1,4 +1,5 @@
 import algorithms.GreedyCycle;
+import algorithms.ILP;
 import algorithms.LP;
 import algorithms.NearestNeighbor;
 import experimnents.Mean;
@@ -16,6 +17,8 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws Exception {
         (new Mean(NearestNeighbor.class.getName(), GreedyCycle.class.getName(), 10)).calc();
         (new Mean(GreedyCycle.class.getName(), NearestNeighbor.class.getName(), 10)).calc();
+        (new Mean(LP.class.getName(), GreedyCycle.class.getName(), 10)).calc();
+        (new Mean(ILP.class.getName(), GreedyCycle.class.getName(), 10)).calc();
 //        Mean.of(LP.class.getName(),10);
 //        Mean.of(ILP.class.getName(),10);
 //        List<Point> points = TSPFileParser.readData("data/kroA100.tsp");
