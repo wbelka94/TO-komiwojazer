@@ -19,31 +19,27 @@ import java.util.List;
 public class TSPVisualisation {
 
 
-    private static List<Circle> addPoints(List<Point> points){
+    private static List<Circle> addPoints(List<Point> points, List<Point> startPoints){
         List<Circle> circles = new ArrayList<>();
-//        cities = TSPFileParser.readData("data/kroA10.tsp");
-        boolean first = true;
         for(Point  p:points){
-//            Label label = new Label(Integer.toString(cities.indexOf(Point)));
             Circle circle = new Circle();
             circle.setCenterX(p.x);
             circle.setCenterY(p.y);
-            circle.setRadius(15);
-            if(first){
+            if(startPoints.contains(p)){
+                circle.setRadius(20);
                 circle.setFill(Color.RED);
-                first = false;
             }
             else {
-                circle.setFill(Color.GREEN);
+                circle.setRadius(15);
+                circle.setFill(Color.BLUE);
             }
-            //circle.radiusProperty().bind(label.widthProperty());
             circles.add(circle);
 
         }
         return circles;
     }
 
-    private static List<Line> joinPoints(List<Point> path){
+    private static List<Line> joinPoints(List<Point> path, Color color){
 
         List<Line> lines = new ArrayList<>();
         for(int i=0; i<path.size(); i++){
@@ -57,7 +53,7 @@ public class TSPVisualisation {
             line.setStartY(path.get(i).y);
             line.setEndX(path.get(next).x);
             line.setEndY(path.get(next).y);
-            line.setStroke(Color.BLUE);
+            line.setStroke(color);
             line.setStrokeWidth(5);
             line.setVisible(true);
             scale.setX(0.3);
@@ -70,7 +66,7 @@ public class TSPVisualisation {
         return lines;
     }
 
-    public static void show(List<Point> points, List<Point> path, String title) throws Exception{
+    public static void show(List<Point> points, List<Point> path1, List<Point> path2, String title) throws Exception{
         Stage primaryStage = new Stage();
         primaryStage.setWidth(1400);
         primaryStage.setHeight(800);
@@ -80,7 +76,10 @@ public class TSPVisualisation {
         Pane root = new Pane();
         root.setBorder(new Border(new BorderStroke(Color.BLACK,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        List<Circle> circles = addPoints(points);
+        List<Point> startPoints = new ArrayList<>();
+        startPoints.add(path1.get(0));
+        startPoints.add(path2.get(0));
+        List<Circle> circles = addPoints(points, startPoints);
         for(Circle circle:circles){
             Scale scale = new Scale();
             Label label = new Label(Integer.toString(circles.indexOf(circle)));
@@ -93,12 +92,14 @@ public class TSPVisualisation {
             label.setLayoutX(circle.getCenterX()*0.3 + 40 );
             label.setLayoutY(circle.getCenterY()*0.3 + 20 );
             circle.getTransforms().addAll(scale);
-            //label.getTransforms().addAll(scale);
             root.getChildren().add(circle);
             root.getChildren().add(label);
         }
-        for(Line line1:joinPoints(path)){
-            root.getChildren().add(line1);
+        for(Line line:joinPoints(path1, Color.RED)){
+            root.getChildren().add(line);
+        }
+        for(Line line:joinPoints(path2, Color.GREEN)){
+            root.getChildren().add(line);
         }
         Label label = new Label();
         label.setAlignment(Pos.CENTER);

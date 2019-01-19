@@ -25,14 +25,10 @@ public class MainFX extends Application {
         List<Point> orderedCitiesILP2 = (new ILP(new ArrayList<>(twoPath.get(1))).arrangePoints());
 
         points = TSPFileParser.readData("data/kroA100.tsp");
-        TSPVisualisation.show(points, orderedCitiesLP1, "LP_1");
-        TSPVisualisation.show(points, orderedCitiesLP2, "LP_2");
-        TSPVisualisation.show(points, orderedCitiesILP1, "ILP_1");
-        TSPVisualisation.show(points, orderedCitiesILP2, "ILP_2");
-        System.out.println(EuclideanDist.calcForPath(orderedCitiesLP1));
-        System.out.println(EuclideanDist.calcForPath(orderedCitiesLP2));
-        System.out.println(EuclideanDist.calcForPath(orderedCitiesILP1));
-        System.out.println(EuclideanDist.calcForPath(orderedCitiesILP2));
+        String title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesLP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesLP2);
+        TSPVisualisation.show(points, orderedCitiesLP1, orderedCitiesLP2, title);
+        title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesILP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesILP2);
+        TSPVisualisation.show(points, orderedCitiesILP1, orderedCitiesILP2,title);
 //        experiment();
     }
 

@@ -32,9 +32,6 @@ public abstract class DivisionAlgorithm extends Algorithm{
         Point actualPoint2 = startPoint2;
 //        int size = points.size();
         while (points.size() >= 2) {
-            if(points.size() == 3){
-                System.out.println("???????????????");
-            }
             actualPoint1 = nextPoint(actualPoint1, startPoint1);
             arrangedPoints1.add(actualPoint1);
             points.remove(actualPoint1);

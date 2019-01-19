@@ -50,7 +50,7 @@ public class ILP extends LP {
        // for(int i=0; i<= r.nextInt(2); i++){
             path = new ArrayList<>(newPath);
             newPath = new ArrayList<>();
-            int r1 = r.nextInt(pathLength);
+            int r1 = r.nextInt(pathLength - 1);
             int r2 = r.nextInt(pathLength - r1 - 1) + r1 + 1;
             List<Point> l1 = new ArrayList<>(path.subList(0, r1));
             List<Point> l2 = new ArrayList<>(path.subList(r1, r2));
