@@ -24,7 +24,7 @@ public class TSPFileParser {
                 Matcher m = r.matcher(line);
                 if(m.find()){
                     splitedLine = line.split(" ");
-                    points.add(new Point(Integer.parseInt(splitedLine[1]), Integer.parseInt(splitedLine[2])));
+                    points.add(new Point(Integer.parseInt(splitedLine[0]), Integer.parseInt(splitedLine[1]), Integer.parseInt(splitedLine[2])));
                 }
 
             }
