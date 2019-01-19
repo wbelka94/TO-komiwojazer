@@ -14,8 +14,8 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Mean.of(GreedyCycle.class.getName(),10);
-        Mean.of(NearestNeighbor.class.getName(),10);
+        (new Mean(NearestNeighbor.class.getName(), GreedyCycle.class.getName(), 10)).calc();
+        (new Mean(GreedyCycle.class.getName(), NearestNeighbor.class.getName(), 10)).calc();
 //        Mean.of(LP.class.getName(),10);
 //        Mean.of(ILP.class.getName(),10);
 //        List<Point> points = TSPFileParser.readData("data/kroA100.tsp");
