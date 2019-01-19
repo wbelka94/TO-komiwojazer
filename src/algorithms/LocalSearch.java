@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LP extends Algorithm {
+public class LocalSearch extends Algorithm {
     private List<Point> currentPath;
     private double currentTotalDistance;
 
-    public LP(List<Point> path) {
+    public LocalSearch(List<Point> path) {
         super(path);
         this.currentPath = path;
         this.currentTotalDistance = EuclideanDist.calcForPath(currentPath);

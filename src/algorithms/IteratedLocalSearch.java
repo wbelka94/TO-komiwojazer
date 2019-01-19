@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ILP extends LP {
+public class IteratedLocalSearch extends LocalSearch {
     private List<Point> currentPath;
     private double currentTotalDistance;
 
-    public ILP(List<Point> path) {
+    public IteratedLocalSearch(List<Point> path) {
         super(path);
         this.currentPath = path;
         this.currentTotalDistance = EuclideanDist.calcForPath(currentPath);

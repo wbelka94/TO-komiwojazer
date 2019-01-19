@@ -8,7 +8,7 @@ import utils.TSPVisualisation;
 
 import java.util.*;
 
-public class Mean {
+public class Mean implements Experiment {
     private final String algorithmClass;
     private final String divisionAlgorithmClass;
     private final int iterations;
@@ -22,7 +22,7 @@ public class Mean {
         this.iterations = iterations;
     }
 
-    public void calc() throws Exception {
+    public void run() throws Exception {
         List<Point> points100 = TSPFileParser.readData("data/kroA100.tsp");
         List<Point> points150 = TSPFileParser.readData("data/kroA150.tsp");
         calcForPoints(points100);
@@ -87,11 +87,11 @@ public class Mean {
         if (Objects.equals(algorithmClass, NearestNeighbor.class.getName())) {
             alg = new NearestNeighbor(new ArrayList<>(points));
         }
-        if (Objects.equals(algorithmClass, LP.class.getName())) {
-            alg = new LP(new ArrayList<>(points));
+        if (Objects.equals(algorithmClass, LocalSearch.class.getName())) {
+            alg = new LocalSearch(new ArrayList<>(points));
         }
-        if (Objects.equals(algorithmClass, ILP.class.getName())) {
-            alg = new ILP(new ArrayList<>(points));
+        if (Objects.equals(algorithmClass, IteratedLocalSearch.class.getName())) {
+            alg = new IteratedLocalSearch(new ArrayList<>(points));
         }
         return alg;
     }
