@@ -16,8 +16,13 @@ public abstract class DivisionAlgorithm extends Algorithm{
         List<Point> arrangedPoints1 = new ArrayList<>();
         List<Point> arrangedPoints2 = new ArrayList<>();
         Random r = new Random();
-        Point startPoint1 = points.get(r.nextInt(points.size()));
-        Point startPoint2 = points.get(r.nextInt(points.size()));
+        int random1 = r.nextInt(points.size());
+        int random2 = r.nextInt(points.size());
+        while(random1 == random2){
+            random2 = r.nextInt(points.size());
+        }
+        Point startPoint1 = points.get(random1);
+        Point startPoint2 = points.get(random2);
         arrangedPoints1.add(startPoint1);
         arrangedPoints2.add(startPoint2);
         points.remove(startPoint1);
@@ -25,8 +30,11 @@ public abstract class DivisionAlgorithm extends Algorithm{
 
         Point actualPoint1 = startPoint1;
         Point actualPoint2 = startPoint2;
-        int size = points.size();
-        for (int i = 0; i < size; i+=2) {
+//        int size = points.size();
+        while (points.size() >= 2) {
+            if(points.size() == 3){
+                System.out.println("???????????????");
+            }
             actualPoint1 = nextPoint(actualPoint1, startPoint1);
             arrangedPoints1.add(actualPoint1);
             points.remove(actualPoint1);
