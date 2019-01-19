@@ -37,10 +37,9 @@ public class NearestNeighbor extends DivisionAlgorithm {
         List<Point> arrangedPoints = new ArrayList<>();
         arrangedPoints.add(startPoint);
         points.remove(startPoint);
-
-        for (int i = 0; i < 99; i++) {
+        int size = points.size();
+        for (int i = 0; i < size; i++) {
             actualPoint = nextPoint(actualPoint, startPoint);
-            System.out.println(actualPoint.x + " " + actualPoint.y);
             arrangedPoints.add(actualPoint);
             points.remove(actualPoint);
         }

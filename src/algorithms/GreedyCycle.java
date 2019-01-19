@@ -3,10 +3,7 @@ package algorithms;
 import models.Point;
 import utils.EuclideanDist;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GreedyCycle extends DivisionAlgorithm {
     private Point actualPoint;
@@ -14,8 +11,9 @@ public class GreedyCycle extends DivisionAlgorithm {
 
     public GreedyCycle(List<Point> points) {
         super(points);
-        actualPoint = points.get(0);
-        startPoint = points.get(0);
+        Random r = new Random();
+        startPoint = points.get(r.nextInt(points.size()));
+        actualPoint = startPoint;
     }
 
     public Point nextPoint(Point actualPoint, Point startPoint) {
@@ -41,7 +39,6 @@ public class GreedyCycle extends DivisionAlgorithm {
         int size = points.size();
         for (int i = 0; i < size; i++) {
             actualPoint = nextPoint(actualPoint, startPoint);
-            System.out.println(actualPoint.x + " " + actualPoint.y);
             arrangedPoints.add(actualPoint);
             points.remove(actualPoint);
         }

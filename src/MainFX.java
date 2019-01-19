@@ -1,12 +1,11 @@
 import algorithms.GreedyCycle;
-import algorithms.ILP;
 import algorithms.LP;
+import algorithms.NearestNeighbor;
+import experimnents.Mean;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import models.Point;
-import utils.EuclideanDist;
 import utils.TSPFileParser;
-import utils.TSPVisualisation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,20 +14,24 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        List<Point> points = TSPFileParser.readData("data/kroA100.tsp");
-
-        List<List<Point>> twoPath = (new GreedyCycle(points)).arangeTwoPath();
-
-        List<Point> orderedCitiesLP1 = (new LP(new ArrayList<>(twoPath.get(0))).arrangePoints());
-        List<Point> orderedCitiesLP2 = (new LP(new ArrayList<>(twoPath.get(1))).arrangePoints());
-        List<Point> orderedCitiesILP1 = (new ILP(new ArrayList<>(twoPath.get(0))).arrangePoints());
-        List<Point> orderedCitiesILP2 = (new ILP(new ArrayList<>(twoPath.get(1))).arrangePoints());
-
-        points = TSPFileParser.readData("data/kroA100.tsp");
-        String title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesLP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesLP2);
-        TSPVisualisation.show(points, orderedCitiesLP1, orderedCitiesLP2, title);
-        title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesILP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesILP2);
-        TSPVisualisation.show(points, orderedCitiesILP1, orderedCitiesILP2,title);
+        Mean.of(GreedyCycle.class.getName(),10);
+        Mean.of(NearestNeighbor.class.getName(),10);
+//        Mean.of(LP.class.getName(),10);
+//        Mean.of(ILP.class.getName(),10);
+//        List<Point> points = TSPFileParser.readData("data/kroA100.tsp");
+//
+//        List<List<Point>> twoPath = (new GreedyCycle(points)).arangeTwoPath();
+//
+//        List<Point> orderedCitiesLP1 = (new LP(new ArrayList<>(twoPath.get(0))).arrangePoints());
+//        List<Point> orderedCitiesLP2 = (new LP(new ArrayList<>(twoPath.get(1))).arrangePoints());
+//        List<Point> orderedCitiesILP1 = (new ILP(new ArrayList<>(twoPath.get(0))).arrangePoints());
+//        List<Point> orderedCitiesILP2 = (new ILP(new ArrayList<>(twoPath.get(1))).arrangePoints());
+//
+//        points = TSPFileParser.readData("data/kroA100.tsp");
+//        String title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesLP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesLP2);
+//        TSPVisualisation.show(points, orderedCitiesLP1, orderedCitiesLP2, title);
+//        title = "LP " + "length: [RED]" + (int)EuclideanDist.calcForPath(orderedCitiesILP1) + "; [GREEN]" + (int)EuclideanDist.calcForPath(orderedCitiesILP2);
+//        TSPVisualisation.show(points, orderedCitiesILP1, orderedCitiesILP2,title);
 //        experiment();
     }
 

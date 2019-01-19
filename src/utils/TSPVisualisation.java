@@ -66,7 +66,7 @@ public class TSPVisualisation {
         return lines;
     }
 
-    public static void show(List<Point> points, List<Point> path1, List<Point> path2, String title) throws Exception{
+    public static void show(List<Point> points, List<Point> path1, List<Point> path2, String title){
         Stage primaryStage = new Stage();
         primaryStage.setWidth(1400);
         primaryStage.setHeight(800);
@@ -78,7 +78,11 @@ public class TSPVisualisation {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         List<Point> startPoints = new ArrayList<>();
         startPoints.add(path1.get(0));
-        startPoints.add(path2.get(0));
+        try {
+            startPoints.add(path2.get(0));
+        }catch (Exception e){
+
+        }
         List<Circle> circles = addPoints(points, startPoints);
         for(Circle circle:circles){
             Scale scale = new Scale();
