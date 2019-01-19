@@ -72,7 +72,7 @@ public class Mean {
     }
 
     private boolean checkMin(int distance, int index){
-        if (minValue == 0 || distance > minValue) {
+        if (minValue == 0 || distance < minValue) {
             minValue = distance;
             return true;
         }
