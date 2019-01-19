@@ -8,7 +8,7 @@ import utils.TSPVisualisation;
 
 import java.util.*;
 
-public class Mean implements Experiment {
+public class MeanExperiment implements Experiment {
     private final String algorithmClass;
     private final String divisionAlgorithmClass;
     private final int iterations;
@@ -16,7 +16,8 @@ public class Mean implements Experiment {
     private int minValue;
     private Map<Integer, List<Point>> max = new HashMap<>();
     private Map<Integer, List<Point>> min = new HashMap<>();
-    public Mean(String algorithmClass, String divisionAlgorithmClass, int iterations){
+
+    public MeanExperiment(String algorithmClass, String divisionAlgorithmClass, int iterations) {
         this.algorithmClass = algorithmClass;
         this.divisionAlgorithmClass = divisionAlgorithmClass;
         this.iterations = iterations;
@@ -34,7 +35,7 @@ public class Mean implements Experiment {
         minValue = 0;
         int sumDist = 0;
         for (int i = 0; i < iterations; i++) {
-            DivisionAlgorithm dAlg = (DivisionAlgorithm) getAlgorithm(divisionAlgorithmClass,points);
+            DivisionAlgorithm dAlg = (DivisionAlgorithm) getAlgorithm(divisionAlgorithmClass, points);
             List<List<Point>> twoPath = dAlg.arangeTwoPath();
             Algorithm alg = getAlgorithm(algorithmClass, twoPath.get(0));
             Algorithm alg2 = getAlgorithm(algorithmClass, twoPath.get(1));
@@ -42,11 +43,11 @@ public class Mean implements Experiment {
             List<Point> r2 = alg2.arrangePoints();
             int totalDist = (int) EuclideanDist.calcForPath(r);
             int totalDist2 = (int) EuclideanDist.calcForPath(r2);
-            if(checkMax(totalDist + totalDist2,3)){
+            if (checkMax(totalDist + totalDist2, 3)) {
                 max.put(0, r);
                 max.put(1, r2);
             }
-            if(checkMin(totalDist + totalDist2,3)){
+            if (checkMin(totalDist + totalDist2, 3)) {
                 min.put(0, r);
                 min.put(1, r2);
             }
@@ -55,7 +56,7 @@ public class Mean implements Experiment {
         System.out.println(algorithmClass + " " + points.size());
         System.out.println("Max dist: " + (int) (EuclideanDist.calcForPath(max.get(0)) + EuclideanDist.calcForPath(max.get(1))));
         System.out.println("Min dist: " + (int) (EuclideanDist.calcForPath(min.get(0)) + EuclideanDist.calcForPath(min.get(1))));
-        System.out.println("Mean dist: " + sumDist / iterations);
+        System.out.println("MeanExperiment dist: " + sumDist / iterations);
 
         String title = algorithmClass + "[" + points.size() + "]" + " [MIN] " + (int) (EuclideanDist.calcForPath(min.get(0)) + EuclideanDist.calcForPath(min.get(1)));
         TSPVisualisation.show(points, min.get(0), min.get(1), title);
@@ -63,7 +64,7 @@ public class Mean implements Experiment {
         TSPVisualisation.show(points, max.get(0), max.get(1), title);
     }
 
-    private boolean checkMax(int distance, int index){
+    private boolean checkMax(int distance, int index) {
         if (maxValue == 0 || distance > maxValue) {
             maxValue = distance;
             return true;
@@ -71,7 +72,7 @@ public class Mean implements Experiment {
         return false;
     }
 
-    private boolean checkMin(int distance, int index){
+    private boolean checkMin(int distance, int index) {
         if (minValue == 0 || distance < minValue) {
             minValue = distance;
             return true;
