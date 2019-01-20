@@ -20,21 +20,25 @@ public class IteratedLocalSearch extends LocalSearch {
     @Override
     public List<Point> arrangePoints() {
         boolean next;
-        ArrayList<Point> newPath = new ArrayList<>(super.arrangePoints());
+        List<Point> copyOfCurrentPath = new ArrayList<>(this.currentPath);
+        super.arrangePoints();
         int i = 0;
         do {
             next = false;
-            newPath = new ArrayList<>(perturbation(newPath));
+            this.currentPath = new ArrayList<>(perturbation(currentPath));
             super.arrangePoints();
-            double newDistance = EuclideanDist.calcForPath(newPath);
-            if (newDistance < this.currentTotalDistance) {
+            double oldDistance = EuclideanDist.calcForPath(copyOfCurrentPath);
+            double newDistance = EuclideanDist.calcForPath(currentPath);
+            if (oldDistance < newDistance) {
                 this.currentTotalDistance = newDistance;
-                this.currentPath = new ArrayList<>(newPath);
-                next = true;
+                this.currentPath = new ArrayList<>(copyOfCurrentPath);
+                copyOfCurrentPath = new ArrayList<>(this.currentPath);
+                i++;
+            }
+            else{
                 i = 0;
             }
-            i++;
-            if(i < 10){
+            if(i < 3){
                 next = true;
             }
         } while (next);
@@ -42,7 +46,7 @@ public class IteratedLocalSearch extends LocalSearch {
         return this.currentPath;
     }
 
-    private List<Point> perturbation(ArrayList<Point> path){
+    private List<Point> perturbation(List<Point> path){
         Random r = new Random();
         int pathLength = path.size();
         List<Point> newPath = new ArrayList<>(path);
