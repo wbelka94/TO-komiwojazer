@@ -3,6 +3,7 @@ package experimnents;
 import algorithms.*;
 import models.Point;
 import utils.EuclideanDist;
+import utils.PointListHelper;
 import utils.TSPFileParser;
 import utils.TSPVisualisation;
 
@@ -57,6 +58,10 @@ public class MeanExperiment implements Experiment {
         System.out.println("Max dist: " + (int) (EuclideanDist.calcForPath(max.get(0)) + EuclideanDist.calcForPath(max.get(1))));
         System.out.println("Min dist: " + (int) (EuclideanDist.calcForPath(min.get(0)) + EuclideanDist.calcForPath(min.get(1))));
         System.out.println("MeanExperiment dist: " + sumDist / iterations);
+        System.out.println("Path max 1: " + PointListHelper.toString(max.get(0)));
+        System.out.println("Path min 1: " + PointListHelper.toString(min.get(0)));
+        System.out.println("Path max 2: " + PointListHelper.toString(max.get(1)));
+        System.out.println("Path min 2: " + PointListHelper.toString(min.get(1)));
 
         String title = algorithmClass + "[" + points.size() + "]" + " [MIN] " + (int) (EuclideanDist.calcForPath(min.get(0)) + EuclideanDist.calcForPath(min.get(1)));
         TSPVisualisation.show(points, min.get(0), min.get(1), title);

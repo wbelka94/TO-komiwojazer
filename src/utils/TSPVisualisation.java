@@ -86,7 +86,7 @@ public class TSPVisualisation {
         List<Circle> circles = addPoints(points, startPoints);
         for(Circle circle:circles){
             Scale scale = new Scale();
-            Label label = new Label(Integer.toString(circles.indexOf(circle)));
+            Label label = new Label(Integer.toString(circles.indexOf(circle) + 1));
             final double MAX_FONT_SIZE = 10.0; // define max font size you need
             label.setFont(new Font(MAX_FONT_SIZE));
             scale.setX(0.3);
